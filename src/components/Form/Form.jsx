@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
 import React, { Component } from 'react';
+import { FormBtn, FormLabel, FormPhoneBook } from './Form.Styled';
 
 export default class Form extends Component {
   state = {
@@ -27,31 +28,32 @@ export default class Form extends Component {
   render() {
     const { name, number } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
+      <FormPhoneBook title="Phonebook" onSubmit={this.handleSubmit}>
+        <FormLabel>
           Name
           <input
             type="text"
             name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            pattern="^[a-zA-Zа-яА-Я]+((['
+            \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             required
             value={name}
             onChange={this.handleChange}
           />
-        </label>
-        <label>
+        </FormLabel>
+        <FormLabel>
           Number
           <input
-            type="text"
+            type="tel"
             name="number"
             pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
             required
             value={number}
             onChange={this.handleChange}
           />
-        </label>
-        <button type="submit">Add contact</button>
-      </form>
+        </FormLabel>
+        <FormBtn type="submit">Add contact</FormBtn>
+      </FormPhoneBook>
     );
   }
 }

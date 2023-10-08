@@ -1,9 +1,10 @@
 import React from 'react';
+import { ContactsPhonelist } from './ContactsList.Styled';
 
 export const ContactsList = ({ contacts, onDelete }) => {
   return (
     <>
-      <ul>
+      <ContactsPhonelist>
         {contacts.map(({ id, name, number }) => (
           <li key={id}>
             <p>{name}</p>
@@ -13,7 +14,7 @@ export const ContactsList = ({ contacts, onDelete }) => {
             </button>
           </li>
         ))}
-      </ul>
+      </ContactsPhonelist>
     </>
   );
 };

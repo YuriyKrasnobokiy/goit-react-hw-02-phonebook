@@ -56,7 +56,9 @@ export default class App extends Component {
 
     return (
       <>
+        <h2>Phonebook</h2>
         <Form addContact={this.addContact} />
+        <h2>Contacts</h2>
         <Filter filter={filter} handleChange={this.handleChange} />
         <ContactsList
           contacts={this.visibleContacts()}
