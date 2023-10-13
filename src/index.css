@@ -16,6 +16,19 @@ button {
   cursor: pointer;
   border: none;
   outline: none;
+  background-color: lightcoral;
+  &:hover {
+    background-color: lightgreen;
+  }
+  &:active {
+    background-color: lightblue;
+  }
+}
+
+h2 {
+  background-color: lightgrey;
+  width: 440px;
+  text-align: center;
 }
 
 img {

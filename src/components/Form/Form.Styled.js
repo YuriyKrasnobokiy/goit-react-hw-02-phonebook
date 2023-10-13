@@ -4,18 +4,13 @@ export const FormPhoneBook = styled.form`
   display: flex;
   flex-direction: column;
   max-width: 400px;
+  padding: 50px 20px;
+  background-color: lightblue;
 `;
 
 export const FormBtn = styled.button`
   width: 120px;
   margin: 0 auto;
-  background-color: lightcoral;
-  &:active {
-    background-color: lightblue;
-  }
-  &:hover {
-    background-color: lightgreen;
-  }
 `;
 
 export const FormLabel = styled.label`
