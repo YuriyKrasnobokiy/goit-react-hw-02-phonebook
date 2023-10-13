@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Form from './Form/Form';
+import AddForm from './Form/Form';
 import { ContactsList } from './ContactsList/ContactsList';
 import { Filter } from './Filter/Filter';
 
@@ -57,7 +57,7 @@ export default class App extends Component {
     return (
       <>
         <h2>Phonebook</h2>
-        <Form addContact={this.addContact} />
+        <AddForm addContact={this.addContact} />
         <h2>Contacts</h2>
         <Filter filter={filter} handleChange={this.handleChange} />
         <ContactsList

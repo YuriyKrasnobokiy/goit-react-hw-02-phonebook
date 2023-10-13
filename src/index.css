@@ -13,6 +13,8 @@ ul {
 }
 
 button {
+  display: flex;
+  align-items: center;
   cursor: pointer;
   border: none;
   outline: none;
