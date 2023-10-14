@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import AddForm from './Form/Form';
+// import AddForm from './Form/Form';
 import { ContactsList } from './ContactsList/ContactsList';
 import { Filter } from './Filter/Filter';
+import { AddForm } from './Form/Form';
 
 export default class App extends Component {
   state = {

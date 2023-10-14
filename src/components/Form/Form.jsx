@@ -1,92 +1,48 @@
 import { nanoid } from 'nanoid';
-import React, { Component } from 'react';
+import React from 'react';
 import { FormBtn, FormLabel, FormPhoneBook } from './Form.Styled';
-import { Formik, Field, ErrorMessage } from 'formik';
+import { ErrorMessage, Field, Formik } from 'formik';
 import * as yup from 'yup';
 
-const regExpForNumb =
-  '+?d{1,4}?[ .-s]?(?d{1,3}?)?[ .-s]?d{1,4}[ .-s]?d{1,4}[ .-s]?d{1,9}';
-
-const regExpForName =
-  "^[a-zA-Zа-яА-Я]+((['-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$";
-
 const schema = yup.object().shape({
-  name: yup.addMethod(yup.string, 'name', function validateName(message) {
-    return this.matches(regExpForName, {
-      message,
-      name: 'number',
-      excludeEmptyString: true,
-    });
-  }),
-  number: yup.addMethod(yup.string, 'number', function validateNumber(message) {
-    return this.matches(regExpForNumb, {
-      message,
-      name: 'number',
-      excludeEmptyString: true,
-    });
-  }),
+  name: yup.string().min(2).required('Required'),
+  number: yup.string().min(13).required('Required'),
 });
 
-export default class AddForm extends Component {
-  state = {
+export const AddForm = props => {
+  const initialValues = {
     name: '',
     number: '',
   };
 
-  handleChange = ({ currentTarget }) => {
-    const { name, value } = currentTarget;
-    this.setState({ [name]: value });
-  };
-
-  handleSubmit = e => {
-    const { name, number } = this.state;
-    e.preventDefault();
+  const handleSubmit = (values, { resetForm }) => {
     const newContact = {
       id: nanoid(),
-      name,
-      number,
+      ...values,
     };
-    this.props.addContact(newContact);
-    this.setState({ name: '', number: '' });
+    props.addContact(newContact);
+    resetForm();
   };
 
-  render() {
-    const { name, number } = this.state;
-    return (
-      <Formik
-        initialValues={this.state}
-        validationSchema={schema}
-        onSubmit={this.handleSubmit}
-      >
-        <FormPhoneBook title="Phonebook">
-          <FormLabel>
-            Name
-            <Field
-              type="text"
-              name="name"
-              //   pattern="^[a-zA-Zа-яА-Я]+((['
-              // \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              // required
-              value={name}
-              onChange={this.handleChange}
-            />
-            <ErrorMessage name="name" component="div" />
-          </FormLabel>
-          <FormLabel>
-            Number
-            <Field
-              type="tel"
-              name="number"
-              // pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
-              // required
-              value={number}
-              onChange={this.handleChange}
-            />
-            <ErrorMessage name="number" component="div" />
-          </FormLabel>
-          <FormBtn type="submit">Add contact</FormBtn>
-        </FormPhoneBook>
-      </Formik>
-    );
-  }
-}
+  return (
+    <Formik
+      initialValues={initialValues}
+      validationSchema={schema}
+      onSubmit={handleSubmit}
+    >
+      <FormPhoneBook>
+        <FormLabel>
+          Name
+          <Field type="text" name="name" />
+          <ErrorMessage component="div" name="name" />
+        </FormLabel>
+        <FormLabel>
+          Number
+          <Field type="text" name="number" />
+          <ErrorMessage component="div" name="number" />
+        </FormLabel>
+        <FormBtn type="submit">Add contact</FormBtn>
+      </FormPhoneBook>
+    </Formik>
+  );
+};
